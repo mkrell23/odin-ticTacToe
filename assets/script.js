@@ -100,7 +100,7 @@ const game = (function(){
 
 function newPlayer(playerMarker){
     const marker = playerMarker;
-    const name = "";
+    let name = null;
 
     function setName(newName){
         name = newName;
