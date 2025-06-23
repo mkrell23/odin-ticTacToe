@@ -12,8 +12,6 @@ h1{
     margin: auto;
     display: grid;
     grid-template-columns: repeat(3, 100px);
-    /* justify-items: center;
-    align-items: stretch; */
     gap: 5px;
     max-width: 310px;
     background-color: black;
