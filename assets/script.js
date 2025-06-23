@@ -1,5 +1,7 @@
 const gameBoard = document.getElementById("board");
 const resetButton = document.getElementById("reset");
+const player1NameBox = document.getElementById("player1Name");
+const player2NameBox = document.getElementById("player2Name");
 
 let playing = true;
 
@@ -114,9 +116,9 @@ const game = (function(){
         return true;
     }
 
-    const whoseTurn = () => player1Turn ? player1 : player2
+    const whoseTurn = () => player1Turn ? player1 : player2;
 
-    return {playTurn, whoseTurn, newGame, player1, player2}
+    return {playTurn, whoseTurn, newGame, player1, player2};
 })()
 
 function newPlayer(playerMarker){
@@ -131,12 +133,24 @@ function newPlayer(playerMarker){
 
     const getMarker = () => marker;
 
-    return {setName, getName, getMarker}
+    return {setName, getName, getMarker};
 };
 
-resetButton.addEventListener('click', function(){
+resetButton.addEventListener('click', resetGame);
+
+function resetGame(){
     game.newGame();
     board.displayBoard();
+};
+
+player1NameBox.addEventListener("input", function(e){
+    // console.log(this.value);
+    game.player1.setName(this.value);
+})
+
+player2NameBox.addEventListener("input", function(e){
+    // console.log(this.value);
+    game.player2.setName(this.value);
 })
 
 board.displayBoard();
