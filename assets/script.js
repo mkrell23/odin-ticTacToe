@@ -11,7 +11,7 @@ const board = (function(){
         return playBoard;
     }
 
-    const showBoard = () => playBoard
+    const getBoard = () => playBoard
 
     function markSquare(marker, position){
         if ( playBoard[position] === ""){
@@ -30,11 +30,17 @@ const board = (function(){
             square.setAttribute("data-id", i);
             square.classList.add("square");
             square.innerText = playBoard[i];
+            square.addEventListener('click', squareClick)
             gameBoard.appendChild(square);
         }
     }
 
-    return {showBoard, markSquare, newBoard, displayBoard};
+    function squareClick(e){
+        game.playTurn(e.target.dataset.id);
+        displayBoard();
+    }
+
+    return {getBoard, markSquare, newBoard, displayBoard};
 })()
 
 const game = (function(){
@@ -119,3 +125,6 @@ function newPlayer(playerMarker){
 
     return {setName, getName, getMarker}
 };
+
+game.newGame();
+board.displayBoard();
