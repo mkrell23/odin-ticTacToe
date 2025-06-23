@@ -17,9 +17,7 @@ const board = (function(){
         return playBoard;
     }
 
-    function showBoard(){
-        return playBoard
-    }
+    const showBoard = () => playBoard
 
     function markSquare(marker, position){
         if ( playBoard[position] === ""){
@@ -27,9 +25,6 @@ const board = (function(){
         }
         return playBoard
     }
-
-    newBoard()
-
 
     return {showBoard, markSquare, newBoard};
 })()
@@ -39,3 +34,18 @@ const game = (function(){
 
     }
 })()
+
+function newPlayer(marker){
+    const marker = marker;
+    const name = "";
+
+    function setName(newName){
+        name = newName;
+    }
+
+    const getName = () => name;
+
+    const getMarker = () => marker;
+
+    return {setName, getName, getMarker}
+}
