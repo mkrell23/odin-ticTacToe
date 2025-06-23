@@ -8,8 +8,12 @@ h1{
     color: darkblue;
 }
 
-#board{
+div {
     margin: auto;
+    text-align: center;
+}
+
+#board{
     display: grid;
     grid-template-columns: repeat(3, 100px);
     gap: 5px;
@@ -23,4 +27,8 @@ h1{
     height: 100px;
     text-align: center;
     font-size: 90px;
+}
+
+button {
+    margin-bottom: 15px;
 }

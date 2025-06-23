@@ -1,4 +1,5 @@
 const gameBoard = document.getElementById("board");
+const resetButton = document.getElementById("reset");
 
 let playing = true;
 
@@ -132,5 +133,10 @@ function newPlayer(playerMarker){
 
     return {setName, getName, getMarker}
 };
+
+resetButton.addEventListener('click', function(){
+    game.newGame();
+    board.displayBoard();
+})
 
 board.displayBoard();
