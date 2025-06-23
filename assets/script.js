@@ -141,6 +141,8 @@ resetButton.addEventListener('click', resetGame);
 function resetGame(){
     game.newGame();
     board.displayBoard();
+    player1NameBox.value = ""
+    player2NameBox.value = ""
 };
 
 player1NameBox.addEventListener("input", function(e){
