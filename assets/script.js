@@ -2,6 +2,7 @@ const gameBoard = document.getElementById("board");
 const resetButton = document.getElementById("reset");
 const player1NameBox = document.getElementById("player1Name");
 const player2NameBox = document.getElementById("player2Name");
+const winnerDisplay = document.getElementById("winner");
 
 let playing = true;
 
@@ -63,6 +64,7 @@ const game = (function(){
         board.newBoard();
         player1.setName(null)
         player2.setName(null)
+        winnerDisplay.innerText = ""
     }
 
     function playTurn(square){
@@ -74,9 +76,12 @@ const game = (function(){
         if (success){
             if (checkWinner(success)){
                 playing = false;
+                currentWinner = (currentPlayer.getName() ? currentPlayer.getName() : currentMarker)
+                winnerDisplay.innerText = (currentWinner + " is the winner!");
                 console.log("WINNER IS", (currentPlayer.getName() ? currentPlayer.getName() : currentMarker));
             } else if (boardFull(success)) {
                 playing = false;
+                winnerDisplay.innerText = "It's a tie!"
                 console.log("TIE");
             } else {
                 switchTurn();
@@ -141,17 +146,15 @@ resetButton.addEventListener('click', resetGame);
 function resetGame(){
     game.newGame();
     board.displayBoard();
-    player1NameBox.value = ""
-    player2NameBox.value = ""
+    player1NameBox.value = null
+    player2NameBox.value = null
 };
 
 player1NameBox.addEventListener("input", function(e){
-    // console.log(this.value);
     game.player1.setName(this.value);
 })
 
 player2NameBox.addEventListener("input", function(e){
-    // console.log(this.value);
     game.player2.setName(this.value);
 })
 
