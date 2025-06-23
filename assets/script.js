@@ -1,4 +1,4 @@
-const displayBoard = document.getElementById("board");
+const gameBoard = document.getElementById("board");
 
 const board = (function(){
     const playBoard = {};
@@ -23,7 +23,18 @@ const board = (function(){
         }
     }
 
-    return {showBoard, markSquare, newBoard};
+    function displayBoard(){
+        gameBoard.innerHTML = "";
+        for (i = 0; i < 9; i++){
+            const square = document.createElement("div");
+            square.setAttribute("data-id", i);
+            square.classList.add("square");
+            square.innerText = playBoard[i];
+            gameBoard.appendChild(square);
+        }
+    }
+
+    return {showBoard, markSquare, newBoard, displayBoard};
 })()
 
 const game = (function(){
