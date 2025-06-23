@@ -62,9 +62,6 @@ const game = (function(){
         playing = true;
         player1Turn = true;
         board.newBoard();
-        player1.setName(null)
-        player2.setName(null)
-        winnerDisplay.innerText = ""
     }
 
     function playTurn(square){
@@ -146,6 +143,9 @@ resetButton.addEventListener('click', resetGame);
 function resetGame(){
     game.newGame();
     board.displayBoard();
+    game.player1.setName(null)
+    game.player2.setName(null)
+    winnerDisplay.innerText = ""
     player1NameBox.value = null
     player2NameBox.value = null
 };
