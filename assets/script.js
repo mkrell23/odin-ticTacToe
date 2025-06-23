@@ -37,6 +37,7 @@ const game = (function(){
     const player2 = newPlayer("O")
 
     let player1Turn = true;
+    board.newBoard();
 
     function newGame(){
         player1Turn = true;
@@ -51,8 +52,10 @@ const game = (function(){
 
         if (success){
             if (checkWinner(success)){
-                console.log("WINNER IS", currentMarker)
-            }else{
+                console.log("WINNER IS", currentMarker);
+            } else if (boardFull(success)) {
+                console.log("TIE");
+            } else {
                 switchTurn();
                 return success;
             };
@@ -81,9 +84,18 @@ const game = (function(){
         }
     }
 
+    function boardFull(board){
+        for (i = 0; i < 9; i++){
+            if (playBoard[i] = ""){
+                return false
+            };
+        };
+        return true;
+    }
+
     const whoseTurn = () => player1Turn ? player1 : player2
 
-    return {playTurn, whoseTurn, newGame, checkWinner}
+    return {playTurn, whoseTurn, newGame}
 })()
 
 function newPlayer(playerMarker){
