@@ -1,5 +1,7 @@
 const gameBoard = document.getElementById("board");
 
+let playing = true;
+
 const board = (function(){
     const playBoard = {};
 
@@ -36,8 +38,10 @@ const board = (function(){
     }
 
     function squareClick(e){
-        game.playTurn(e.target.dataset.id);
-        displayBoard();
+        if (playing){
+            game.playTurn(e.target.dataset.id);
+            displayBoard();
+        }
     }
 
     return {getBoard, markSquare, newBoard, displayBoard};
@@ -51,6 +55,7 @@ const game = (function(){
     board.newBoard();
 
     function newGame(){
+        playing = true;
         player1Turn = true;
         board.newBoard();
         player1.setName(null)
@@ -65,8 +70,10 @@ const game = (function(){
 
         if (success){
             if (checkWinner(success)){
+                playing = false;
                 console.log("WINNER IS", (currentPlayer.getName() ? currentPlayer.getName() : currentMarker));
             } else if (boardFull(success)) {
+                playing = false;
                 console.log("TIE");
             } else {
                 switchTurn();
@@ -126,5 +133,4 @@ function newPlayer(playerMarker){
     return {setName, getName, getMarker}
 };
 
-game.newGame();
 board.displayBoard();
