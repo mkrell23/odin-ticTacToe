@@ -10,7 +10,7 @@ const board = (function(){
     const playBoard = {};
 
     function newBoard(){
-        for (i = 1; i <= 9; i++){
+        for (i = 0; i < 9; i++){
             playBoard[i] = "";
         };
 
@@ -43,31 +43,47 @@ const game = (function(){
         board.newBoard();
     }
 
-    function playRound(square){
-        currentPlayer = player1Turn ? player1 : player2;
+    function playTurn(square){
+        currentPlayer = whoseTurn();
         currentMarker = currentPlayer.getMarker();
 
         success = board.markSquare(currentMarker, square)
 
         if (success){
-            player1Turn = !player1Turn;
-            return true;
+            if (checkWinner(success)){
+                console.log("WINNER IS", currentMarker)
+            }else{
+                switchTurn();
+                return success;
+            };
         } else {
             return false;
         }
     };
 
-    function whoseTurn(){
-        // Why doesn't this work??
-        // player1Turn ? player1 : player2
-        if (player1Turn) {
-            return player1;
-        } else {
-            return player2;
-        }
+    function switchTurn(){
+        player1Turn = !player1Turn
     };
 
-    return {playRound, whoseTurn, newGame}
+    function checkWinner(board){
+        if (board[0] !== "" && board[0] === board[1] && board[0] === board[2]
+            || board[3] !== "" && board[3] === board[4] && board[3] === board[5]
+            || board[6] !== "" && board[6] === board[7] && board[6] === board[8]
+            || board[0] !== "" && board[0] === board[3] && board[0] === board[6]
+            || board[1] !== "" && board[1] === board[4] && board[1] === board[7]
+            || board[2] !== "" && board[2] === board[5] && board[2] === board[8]
+            || board[0] !== "" && board[0] === board[4] && board[0] === board[8]
+            || board[2] !== "" && board[2] === board[4] && board[2] === board[6]
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    const whoseTurn = () => player1Turn ? player1 : player2
+
+    return {playTurn, whoseTurn, newGame, checkWinner}
 })()
 
 function newPlayer(playerMarker){
