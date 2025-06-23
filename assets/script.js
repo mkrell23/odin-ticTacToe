@@ -42,6 +42,8 @@ const game = (function(){
     function newGame(){
         player1Turn = true;
         board.newBoard();
+        player1.setName(null)
+        player2.setName(null)
     }
 
     function playTurn(square){
@@ -52,7 +54,7 @@ const game = (function(){
 
         if (success){
             if (checkWinner(success)){
-                console.log("WINNER IS", currentMarker);
+                console.log("WINNER IS", (currentPlayer.getName() ? currentPlayer.getName() : currentMarker));
             } else if (boardFull(success)) {
                 console.log("TIE");
             } else {
@@ -84,9 +86,9 @@ const game = (function(){
         }
     }
 
-    function boardFull(board){
+    function boardFull(playBoard){
         for (i = 0; i < 9; i++){
-            if (playBoard[i] = ""){
+            if (playBoard[i] === ""){
                 return false
             };
         };
@@ -95,7 +97,7 @@ const game = (function(){
 
     const whoseTurn = () => player1Turn ? player1 : player2
 
-    return {playTurn, whoseTurn, newGame}
+    return {playTurn, whoseTurn, newGame, player1, player2}
 })()
 
 function newPlayer(playerMarker){
